@@ -4,6 +4,7 @@ import Home from "../Home/Home";
 import Books from "../Books/Books";
 import Book from "../Book/Book";
 import About from "../About/About";
+import ViewBook from "../ViewBook/ViewBook";
 
 export const router = createBrowserRouter([
     {
@@ -20,7 +21,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/books/:id',
-                element: <Book></Book>
+                element: <ViewBook></ViewBook>
             },
             {
                 path: '/about',
