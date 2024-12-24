@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { getSingleBook } from '../../api';
 import Loader from '../Loader/Loader';
+import { LiaBarcodeSolid } from "react-icons/lia";
+import { FaBookOpen } from "react-icons/fa";
+import { IoCalendarNumberSharp } from "react-icons/io5";
 
 const ViewBook = () => {
     const [singleData, setSingleData] = useState([]);
@@ -21,7 +24,10 @@ const ViewBook = () => {
         }
         loadSingleBook();
     }, [params.id])
-    const { title, thumbnailUrl, authors = [], categories = [], shortDescription, status } = singleData;
+    const { title, thumbnailUrl, authors = [], categories = [], shortDescription, status, isbn, pageCount, publishedDate, longDescription } = singleData;
+    const formattedDate = publishedDate?.$date
+        ? new Date(publishedDate.$date).toLocaleDateString('en-GB') // Format the date
+        : 'N/A';
     return (
         <div>
             {
@@ -48,8 +54,25 @@ const ViewBook = () => {
                             </div>
                         </div>
                         {/* More Details */}
-                        <div className='bg-stone-200'>
-
+                        <div className='bg-stone-200 p-5 my-11 rounded-md'>
+                            <div className='grid grid-cols-2 lg:grid-cols-3'>
+                                <div className='flex flex-col justify-center items-center'>
+                                    <p><LiaBarcodeSolid className='text-3xl'></LiaBarcodeSolid></p>
+                                    <p>{isbn}</p>
+                                </div>
+                                <div className='flex flex-col justify-center items-center'>
+                                    <p><FaBookOpen className='text-3xl'></FaBookOpen></p>
+                                    <p>{pageCount} Pages.</p>
+                                </div>
+                                <div className='flex flex-col justify-center items-center'>
+                                    <p><IoCalendarNumberSharp className='text-3xl'></IoCalendarNumberSharp></p>
+                                    <p>{formattedDate}</p>
+                                </div>
+                            </div>
+                            <div className='mt-11'>
+                                <h1 className='text-2xl font-semibold'>Description: </h1>
+                                <p className='leading-8'>{longDescription}</p>
+                            </div>
                         </div>
                     </div>
             }
