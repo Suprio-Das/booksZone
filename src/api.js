@@ -11,3 +11,13 @@ export async function getAllBooks() {
         return
     }
 }
+
+export async function getSingleBook(id) {
+    let response = await axios.get(`${url}/books/${id}`);
+    if (response.status === 200) {
+        return response.data;
+    }
+    else {
+        return
+    }
+}
