@@ -25,11 +25,17 @@ const Books = () => {
         <div>
             {loading ? (
                 <Loader />
-            ) : <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-11 mx-auto w-[95%]">{(
-                books.map((book, index) => (
-                    <Book key={index} book={book} />
-                ))
-            )}</div>}
+            ) : <div className="mx-auto w-[95%]">
+                <h1 className="text-3xl my-5 text-center font-bold">Find Your Dream Books</h1>
+                <p className="border-2 border-b-2 border-black mb-11 w-[15%] mx-auto"></p>
+                <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-11">
+                    {(
+                        books.map((book, index) => (
+                            <Book key={index} book={book} />
+                        ))
+                    )}
+                </div>
+            </div>}
         </div>
     );
 };
