@@ -10,7 +10,7 @@ const Book = ({ book }) => {
             <img
                 src={thumbnailUrl}
                 className="shadow rounded-lg overflow-hidden border"
-                alt="Exercise illustration"
+                alt={title}
             />
             {/* Ensure this div is aligned to the bottom */}
             <div className="mt-auto">

@@ -21,15 +21,17 @@ const ViewBook = () => {
         }
         loadSingleBook();
     }, [params.id])
-    const { title, thumbnailUrl, authors = [], categories = [], shortDescription } = singleData;
+    const { title, thumbnailUrl, authors = [], categories = [], shortDescription, status } = singleData;
     return (
         <div>
             {
                 loading ? <Loader></Loader> :
-                    <div>
-                        <div className='grid grid-cols-1 lg:grid-cols-2 gap-10 mx-auto w-[95%] my-11'>
+                    <div className='mx-auto w-[95%]'>
+                        <div className='grid grid-cols-1 lg:grid-cols-2 gap-10 my-11'>
                             <div className='bg-stone-200 lg:p-11 flex justify-center items-center rounded-md'>
-                                <img src={thumbnailUrl} alt={title} className='h-[100%]' />
+                                {
+                                    thumbnailUrl ? <img src={thumbnailUrl} alt={title} className='h-[100%]' /> : "Image not available"
+                                }
                             </div>
                             <div className='leading-8'>
                                 <h1 className='text-2xl font-semibold'>{title}</h1>
@@ -39,10 +41,15 @@ const ViewBook = () => {
                                         authors.map((author, index) => <li key={index}>{author}</li>)
                                     }
                                 </ul>
-                                <p className='font-semibold'>Category: {categories.map((category, index) => <span key={index} className='ms-3 text-amber-600 styled_font'>{category}</span>)}</p>
+                                <p className='font-semibold'>Category: {categories ? categories.map((category, index) => <span key={index} className='ms-3 text-amber-600 styled_font'>{category}</span>) : "Unknown"}</p>
+                                <p>Status: {status ? <span className='text-blue-500'>{status}</span> : "Unknown"}</p>
                                 <p className='font-semibold'>Short Description: </p>
-                                <p className='text-justify'>{shortDescription}</p>
+                                <p className='text-justify'>{shortDescription ? shortDescription : "Not Available"}</p>
                             </div>
+                        </div>
+                        {/* More Details */}
+                        <div className='bg-stone-200'>
+
                         </div>
                     </div>
             }
